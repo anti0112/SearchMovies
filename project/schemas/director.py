@@ -1,7 +1,6 @@
-from marshmallow import fields, Schema
+from marshmallow import Schema, fields
 
 
-class GenreSchema(Schema):
+class DirectorSchema(Schema):
     id = fields.Int(required=True)
     name = fields.Str(required=True)
-

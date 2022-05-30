@@ -18,6 +18,9 @@ class BaseConfig:
     PWD_HASH_SALT = base64.b64decode("salt")
     PWD_HASH_ITERATIONS = 100_000
 
+    JWT_SECRET = 'An7Ti1%'
+    JWT_ALGORITHM = 'HS256'
+
 
 class TestingConfig(BaseConfig):
     TESTING = True
