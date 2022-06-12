@@ -16,11 +16,13 @@ directors_schema = DirectorSchema(many=True)
 class DirectorsView(Resource):
     @auth_required
     def get(self):
+        """Получение всех режиссеров """
         director = director_service.get_all()
         return directors_schema.dump(director), 200
 
     @admin_required
     def post(self):
+        """Добавление нового режиссера в БД"""
         data = request.get_json()
         director_service.create(data)
         return "Успешно создано", 201
@@ -30,11 +32,13 @@ class DirectorsView(Resource):
 class DirectorView(Resource):
     @auth_required
     def get(self, did):
+        """Получение одного режиссера по id"""
         director = director_service.get_one(did)
         return director_schema.dump(director), 200
 
     @admin_required
     def put(self, did):
+        """Обновление данных о режиссере"""
         data = request.get_json()
         data['id'] = did
 
@@ -44,6 +48,7 @@ class DirectorView(Resource):
 
     @admin_required
     def delete(self, did):
+        """Удаление режиссера из БД"""
         director_service.delete(did)
 
         return "Удалено", 204

@@ -17,8 +17,11 @@ class MoviesView(Resource):
         director_id = request.args.get('director_id')
         genre_id = request.args.get('genre_id')
         year_id = request.args.get('year')
-
-        if director_id:
+        status = request.args.get('status')
+        page = request.args.get('page')
+        if page:
+            movies = movie_service.get_all_page(page)
+        elif director_id:
             movies = movie_service.get_director(director_id)
         elif genre_id:
             movies = movie_service.get_genre(genre_id)
@@ -26,11 +29,13 @@ class MoviesView(Resource):
             movies = movie_service.get_year(year_id)
         else:
             movies = movie_service.get_all()
+            print(movies)
 
         return movies_schema.dump(movies), 200
 
     @admin_required
     def post(self):
+        """Добавление нового фильма"""
         data = request.get_json()
         movie_service.create(data)
 
@@ -41,12 +46,14 @@ class MoviesView(Resource):
 class MoviesView(Resource):
     @auth_required
     def get(self, mid):
+        """Получение фильма по id"""
         movie = movie_service.get_one(mid)
 
         return movie_schema.dump(movie), 200
 
     @admin_required
     def put(self, mid):
+        """Обновление информации о фильме"""
         data = request.get_json()
         data['id'] = mid
 
@@ -56,6 +63,7 @@ class MoviesView(Resource):
 
     @admin_required
     def delete(self, mid):
+        """Удаление фильма"""
         movie_service.delete(mid)
 
         return "Успешно удалено", 204

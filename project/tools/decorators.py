@@ -2,6 +2,8 @@ from flask import request, abort
 from project.config import BaseConfig
 import jwt
 
+from project.tools.implemented import user_service
+
 config = BaseConfig()
 
 
@@ -16,11 +18,11 @@ def auth_required(func):
         token = data.split('Bearer ')[-1]
 
         try:
-            jwt.decode(token, config.JWT_SECRET, algorithms=[config.JWT_ALGORITHM])
+            data = jwt.decode(token, config.JWT_SECRET, algorithms=[config.JWT_ALGORITHM])
         except Exception as e:
             print('JWT decode error', e)
             abort(401)
-        return func(*args, **kwargs)
+        return func(*args, *kwargs)
     return wrapper
 
 
@@ -39,7 +41,6 @@ def admin_required(func):
         try:
             user = jwt.decode(token, config.JWT_SECRET, algorithms=[config.JWT_ALGORITHM])
             role = user.get("role")
-            print(user)
 
         except Exception as e:
             print('JWT decode error', e)
@@ -52,3 +53,7 @@ def admin_required(func):
 
         return func(*args, **kwargs)
     return wrapper
+
+
+
+

@@ -9,6 +9,12 @@ class MovieDAO:
         """Получение всего списка с фильмами """
         return self.session.query(Movie).all()
 
+    def get_all_page(self, page):
+        if page is not None:
+            lim = 12
+            offs = (int(page) - 1) * lim
+            return self.session.query(Movie).limit(12).offset(offs).all()
+
     def get_one(self, mid):
         """Получение определенного фильма по id"""
         return self.session.query(Movie).get(mid)

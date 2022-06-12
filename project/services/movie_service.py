@@ -5,6 +5,9 @@ class MovieService:
     def get_all(self):
         return self.dao.get_all()
 
+    def get_all_page(self, page):
+        return self.dao.get_all_page(page)
+
     def get_one(self, mid):
         return self.dao.get_one(mid)
 

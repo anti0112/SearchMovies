@@ -8,7 +8,7 @@ from project.views import genres_ns
 from project.views.auth import auth_ns
 from project.views.directors import directors_ns
 from project.views.movies import movies_ns
-from project.views.users import users_ns
+from project.views.users import users_ns, user_ns
 
 api = Api(
     authorizations={
@@ -18,7 +18,6 @@ api = Api(
     doc="/docs",
 )
 
-# Нужно для работы с фронтендом
 # cors = CORS()
 
 
@@ -27,6 +26,7 @@ def create_app(config_object):
     application = Flask(__name__)
     application.config.from_object(config_object)
     application.app_context().push()
+    # cors.init_app(application)
     register_extensions(application)
     return application
 
@@ -40,6 +40,7 @@ def register_extensions(application):
     api.add_namespace(genres_ns)
     api.add_namespace(users_ns)
     api.add_namespace(auth_ns)
+    api.add_namespace(user_ns)
 
 
 if __name__ == "__main__":

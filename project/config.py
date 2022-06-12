@@ -28,6 +28,7 @@ class TestingConfig(BaseConfig):
 
 
 class DevelopmentConfig(BaseConfig):
+    RESTX_JSON = {"ensure_ascii": False,"indent": 4}
     DEBUG = True
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
