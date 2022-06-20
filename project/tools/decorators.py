@@ -2,7 +2,6 @@ from flask import request, abort
 from project.config import BaseConfig
 import jwt
 
-from project.tools.implemented import user_service
 
 config = BaseConfig()
 
@@ -22,7 +21,7 @@ def auth_required(func):
         except Exception as e:
             print('JWT decode error', e)
             abort(401)
-        return func(*args, *kwargs)
+        return func(*args, **kwargs)
     return wrapper
 
 

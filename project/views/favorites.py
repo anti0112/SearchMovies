@@ -13,9 +13,7 @@ class FavoritesView(Resource):
         token = auth_service.get_data_token()
         user = user_service.get_by_username(token["email"])
 
-
         favorite_service.add_movie(movie_id, user)
-        # favorite_service.query_response(movie_id)
 
         return "Успешно добавлено", 201
 
@@ -24,7 +22,7 @@ class FavoritesView(Resource):
         token = auth_service.get_data_token()
         user = user_service.get_by_username(token["email"])
 
-        favorite_service.delete(movie_id)
+        favorite_service.delete(user, movie_id)
 
         return "Фильм удален из избранного", 200
 

@@ -22,6 +22,7 @@ class AuthService:
         # if not self.user_service.compare_password(user.password, password):
         #     abort(400)
 
+
         data = {
             "email": user.email,
             "role": user.role,

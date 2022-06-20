@@ -7,6 +7,7 @@ from project.setup_db import db
 from project.views import genres_ns
 from project.views.auth import auth_ns
 from project.views.directors import directors_ns
+from project.views.favorites import favorites_ns
 from project.views.movies import movies_ns
 from project.views.users import users_ns, user_ns
 
@@ -41,6 +42,7 @@ def register_extensions(application):
     api.add_namespace(users_ns)
     api.add_namespace(auth_ns)
     api.add_namespace(user_ns)
+    api.add_namespace(favorites_ns)
 
 
 if __name__ == "__main__":

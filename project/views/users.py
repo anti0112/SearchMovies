@@ -45,4 +45,4 @@ class UserView(Resource):
     def get(self):
         token = auth_service.get_data_token()
         user = user_service.get_by_username(token["email"])
-        return user
+        return UserSchema().dump(user)

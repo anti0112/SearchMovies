@@ -1,10 +1,8 @@
-from sqlalchemy.orm.scoping import scoped_session
-
 from project.dao.models import Genre
 
 
 class GenreDAO:
-    def __init__(self, session: scoped_session):
+    def __init__(self, session):
         self._db_session = session
 
     def get_by_id(self, pk):

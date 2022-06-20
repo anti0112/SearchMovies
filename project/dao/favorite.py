@@ -7,6 +7,7 @@ class FavoriteDAO:
         self.session = session
 
     def add_movie(self, movie_id, user):
+
         data = {
             "user_id": user.id,
             "movie_id": movie_id
@@ -15,13 +16,13 @@ class FavoriteDAO:
         self.session.add(favorite_movie)
         self.session.commit()
 
-    def delete(self, movie_id):
+    def delete(self, user, movie_id):
 
-        movie = self.session.query(Favorite).get(movie_id)
+        movie = self.session.query(Favorite).filter(
+            Favorite.movie_id == movie_id and
+            Favorite.user_id == user.id).first()
+
         self.session.delete(movie)
         self.session.commit()
 
-    def query_response(self, movie_id):
-        data = self.session.query(Favorite).join(Movie).filter(Movie.id == movie_id).one_or_none()
-        print(data.movie_id.description)
 

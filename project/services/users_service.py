@@ -14,7 +14,7 @@ class UserService:
 
     def get_by_username(self, name):
         user = self.dao.get_by_username(name)
-        return UserSchema().dump(user)
+        return user
 
     def create(self, data):
         data['password'] = self.generete_password(data['password'])
