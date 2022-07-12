@@ -29,7 +29,6 @@ class MoviesView(Resource):
             movies = movie_service.get_year(year_id)
         else:
             movies = movie_service.get_all()
-            print(movies)
 
         return movies_schema.dump(movies), 200
 
