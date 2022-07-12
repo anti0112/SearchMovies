@@ -1,4 +1,9 @@
 ## Описание проекта
+- Создать виртуальное окружение
+```shell
+virtualenv venv
+```
+
 - Установка зависимостей
 ```shell
 pip install -r requirements.txt
@@ -17,7 +22,7 @@ python load_fixture
 
 ## Запуск проекта
 ```shell
-project/server.py
+server.py
 ```
 
 ## Ручное тестирование работоспособности через POSTMAN 
